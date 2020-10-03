@@ -15,7 +15,7 @@ void Scheduler::add(PCB p) {
 }
 
 PCB Scheduler::getNext() {
-
+ return PCB();
 }
 
 bool Scheduler::isEmpty() {
@@ -23,5 +23,5 @@ bool Scheduler::isEmpty() {
 }
 
 bool Scheduler::time_to_switch_processes(int tick_count, PCB &p) {
-
+ return false;
 }
