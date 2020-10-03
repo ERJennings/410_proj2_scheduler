@@ -8,7 +8,20 @@
 //TODO fill in content
 
 
+#include "../includes/scheduler.h"
 
+void Scheduler::add(PCB p) {
 
+}
 
+PCB Scheduler::getNext() {
 
+}
+
+bool Scheduler::isEmpty() {
+	return true;
+}
+
+bool Scheduler::time_to_switch_processes(int tick_count, PCB &p) {
+
+}
