@@ -11,17 +11,30 @@
 #include "../includes/scheduler.h"
 
 void Scheduler::add(PCB p) {
-
+	ready_q->push(p);
 }
 
 PCB Scheduler::getNext() {
- return PCB();
+	PCB next = ready_q->front();
+	ready_q->pop();
+	return next;
 }
 
 bool Scheduler::isEmpty() {
-	return true;
+	return ready_q->empty();;
 }
 
 bool Scheduler::time_to_switch_processes(int tick_count, PCB &p) {
- return false;
+
+	if (tick_count >= p.remaining_cpu_time && !preemptive) {
+
+	}
+
+	else if (preemptive) {
+		if (tick_count >= time_slice){
+			return true;
+		}
+	}
+
+	return false;
 }
