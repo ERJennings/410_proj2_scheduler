@@ -8,16 +8,30 @@
 //TODO fill in content
 
 #include "../includes/stats.h"
+#include <vector>
 
 Stats::Stats(std::vector<PCB> &finished_vector) {
-	av_wait_time = UNINITIALIZED;
-	av_turnaround_time = UNINITIALIZED;
 	av_response_time = UNINITIALIZED;
+	av_turnaround_time = UNINITIALIZED;
+	av_wait_time = UNINITIALIZED;
 	vec = &finished_vector;
+	calcStats();
 }
 
 void Stats::showAllProcessInfo() {
+	for (int i = 0; i < vec->size(); i++) {
+		//Process 1 Required CPU time:2  arrived:0 started:0 finished:2
 
+		//Can't concat like this, trying something else
+		//printf("Process " + vec->at(i).process_number +" Required CPU time:" +
+				//vec->at(i).required_cpu_time + " arrived:" +
+						//vec->at(i).arrival_time + " started:" + vec->at(i).start_time
+						//+ " finished:" + vec->at(i).finish_time);
+
+		//Remember this for later reference: http://www.cplusplus.com/reference/cstdio/printf/
+		printf("Process %d Required CPU time:%d arrived:%d started:%d finished:%d\n", vec->at(i).process_number, vec->at(i).required_cpu_time,
+						vec->at(i).arrival_time, vec->at(i).start_time,  vec->at(i).finish_time);
+	}
 }
 
 float Stats::get_av_response_time() {
@@ -33,5 +47,24 @@ float Stats::get_av_wait_time() {
 }
 
 void Stats::calcStats(){
+	av_response_time = 0;
+	av_turnaround_time = 0;
+	av_wait_time = 0;
+
+	int index = vec->size() - 1;
+
+	for (int i = 0; i < vec->size(); i++) {
+		av_response_time += ((vec->at(index)).start_time) -
+				((vec->at(index)).arrival_time);
+		av_turnaround_time += ((vec->at(index)).finish_time)
+				- ((vec->at(index)).arrival_time);
+		av_wait_time += ((vec->at(index)).finish_time) -
+				((vec->at(index)).arrival_time) - ((vec->at(index)).required_cpu_time);
+		index--;
+	}
+
+	av_response_time /= vec->size();
+	av_turnaround_time /= vec->size();
+	av_wait_time /= vec->size();
 
 }
