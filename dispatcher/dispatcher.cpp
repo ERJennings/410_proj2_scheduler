@@ -5,8 +5,6 @@
  *      Author: keith
  */
 
-//TODO fill in content
-
 #include "../includes/dispatcher.h"
 
 PCB Dispatcher::get_from_CPU() {

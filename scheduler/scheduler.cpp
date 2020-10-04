@@ -5,9 +5,6 @@
  *      Author: keith
  */
 
-//TODO fill in content
-
-
 #include "../includes/scheduler.h"
 
 void Scheduler::add(PCB p) {

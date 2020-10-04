@@ -8,23 +8,25 @@
  *     pre-emptive
  */
 
-//TODO fill in content
-
 #include "../includes/scheduler_SRTF.h"
 
 bool Scheduler_SRTF::time_to_switch_processes(int tick_count, PCB &p) {
+
 	sort();
 	int remainingTime = p.remaining_cpu_time;
+
 	if (remainingTime > 0 && remainingTime > ready_q->front().remaining_cpu_time) {
 		return true;
 	}
 	else if (remainingTime <= 0) {
 		return true;
 	}
+
 	return false;
 }
 
 void Scheduler_SRTF::sort() {
+
 	PCB higher;
 	std::vector<PCB> sortingVector;
 
@@ -33,8 +35,6 @@ void Scheduler_SRTF::sort() {
 		ready_q->pop();
 	}
 
-
-	// Not efficient according to CPSC 420 but it works.
 	for (int i = 0; i < sortingVector.size(); i++) {
 		for (int j = i + 1; j < sortingVector.size(); j++) {
 			if (sortingVector[i].remaining_cpu_time > sortingVector[j].remaining_cpu_time) {
